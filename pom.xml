@@ -11,7 +11,7 @@
   </parent>
   <groupId>bootjava</groupId>
   <artifactId>restaurant-voting</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <name>sb-restaurant</name>
   <description>sb-restaurant</description>
   <properties>
