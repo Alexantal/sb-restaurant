@@ -21,10 +21,7 @@ public class SbRestaurantApplication implements ApplicationRunner {
   }
 
   @Override
-  public void run(ApplicationArguments args) throws Exception {
-    userRepository.save(new User("user@gmail.com", "User_First", "User_Last", "password", Set.of(Role.ROLE_USER)));
-    userRepository.save(new User("user2@gmail.com", "User2_First", "User2_Last", "password2", Set.of(Role.ROLE_USER)));
-    userRepository.save(new User("admin@javaops.ru", "Admin_First", "Admin_Last", "admin", Set.of(Role.ROLE_USER, Role.ROLE_ADMIN)));
+  public void run(ApplicationArguments args) {
     System.out.println(userRepository.findAll());
   }
 }
