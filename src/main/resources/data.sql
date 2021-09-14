@@ -1,9 +1,9 @@
 INSERT INTO USERS (EMAIL, FIRST_NAME, LAST_NAME, PASSWORD)
-VALUES ('User', 'user@yandex.ru', '{noop}password', '2021-01-10'),
-       ('User2', 'user2@yandex.ru', '{noop}password', '2021-01-10'),
-       ('User3', 'user3@yandex.ru', '{noop}password', '2021-01-10'),
-       ('User4', 'user4@yandex.ru', '{noop}password', '2021-01-10'),
-       ('Admin', 'admin@gmail.com', '{noop}admin', '2021-01-10');
+VALUES ('user1@yandex.ru', 'User1_First', 'User1_Last', '{noop}password'),
+       ('user2@yandex.ru', 'User2_First', 'User2_Last', '{noop}password'),
+       ('user3@yandex.ru', 'User3_First', 'User3_Last', '{noop}password'),
+       ('user4@yandex.ru', 'User4_First', 'User4_Last', '{noop}password'),
+       ('admin@gmail.com', 'Admin_First', 'Admin_Last', '{noop}admin');
 
 INSERT INTO RESTAURANTS (NAME, REGISTERED)
 VALUES ('Astoria', '2015-01-01'),
