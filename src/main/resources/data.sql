@@ -1,5 +1,5 @@
 INSERT INTO USERS (EMAIL, FIRST_NAME, LAST_NAME, PASSWORD)
-VALUES ('user1@yandex.ru', 'User1_First', 'User1_Last', '{noop}password'),
+VALUES ('user@gmail.com', 'User1_First', 'User1_Last', '{noop}password'),
        ('user2@yandex.ru', 'User2_First', 'User2_Last', '{noop}password'),
        ('user3@yandex.ru', 'User3_First', 'User3_Last', '{noop}password'),
        ('user4@yandex.ru', 'User4_First', 'User4_Last', '{noop}password'),
