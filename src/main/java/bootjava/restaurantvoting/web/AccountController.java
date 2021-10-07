@@ -5,6 +5,7 @@ import bootjava.restaurantvoting.model.Role;
 import bootjava.restaurantvoting.model.User;
 import bootjava.restaurantvoting.repository.UserRepository;
 import bootjava.restaurantvoting.util.ValidationUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -33,6 +34,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @RequestMapping("/api/account")
 @AllArgsConstructor
 @Slf4j
+@Tag(name = "Account Controller")
 public class AccountController implements RepresentationModelProcessor<RepositoryLinksResource> {
 
     private final UserRepository userRepository;
@@ -59,7 +61,7 @@ public class AccountController implements RepresentationModelProcessor<Repositor
         userRepository.deleteById(authUser.id());
     }
 
-    @PostMapping(value = "/register", consumes = MediaTypes.HAL_JSON_VALUE)
+    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<EntityModel<User>> register(@Valid @RequestBody User user) {
         log.info("register {}", user);
