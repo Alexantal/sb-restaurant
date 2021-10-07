@@ -2,7 +2,9 @@ package bootjava.restaurantvoting.util;
 
 import bootjava.restaurantvoting.error.IllegalRequestDataException;
 import bootjava.restaurantvoting.model.BaseEntity;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class ValidationUtil {
 
     public static void checkNew(BaseEntity entity) {
