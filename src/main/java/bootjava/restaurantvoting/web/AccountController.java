@@ -31,12 +31,13 @@ import java.util.Set;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping(AccountController.URL)
 @AllArgsConstructor
 @Slf4j
 @Tag(name = "Account Controller")
 public class AccountController implements RepresentationModelProcessor<RepositoryLinksResource> {
 
+    public static final String URL = "/api/account";
     private final UserRepository userRepository;
 
     @SuppressWarnings("unchecked")
