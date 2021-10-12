@@ -1,14 +1,18 @@
 package bootjava.restaurantvoting.web;
 
+import bootjava.restaurantvoting.UserTestUtil;
+import bootjava.restaurantvoting.model.User;
 import bootjava.restaurantvoting.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static bootjava.restaurantvoting.UserTestUtil.*;
+import static bootjava.restaurantvoting.util.JsonUtil.writeValue;
 import static bootjava.restaurantvoting.web.AccountController.URL;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -25,7 +29,8 @@ public class AccountControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.get(URL))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(content().contentTypeCompatibleWith(MediaTypes.HAL_JSON_VALUE));
+                .andExpect(content().contentTypeCompatibleWith(MediaTypes.HAL_JSON_VALUE))
+                .andExpect(jsonMatcher(user, UserTestUtil::assertEquals));
     }
 
     @Test
@@ -41,5 +46,30 @@ public class AccountControllerTest extends AbstractControllerTest {
                 .andExpect(status().isNoContent());
         Assertions.assertFalse(userRepository.findById(USER_ID).isPresent());
         Assertions.assertTrue(userRepository.findById(ADMIN_ID).isPresent());
+    }
+
+    @Test
+    void register() throws Exception {
+        User newUser = UserTestUtil.getNew();
+        User registered = asUser(perform(MockMvcRequestBuilders.post(URL + "/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(writeValue(newUser)))
+                .andExpect(status().isCreated()).andReturn());
+        int newId = registered.id();
+        newUser.setId(newId);
+        UserTestUtil.assertEquals(registered, newUser);
+        UserTestUtil.assertEquals(registered, userRepository.findById(newId).orElseThrow());
+    }
+
+    @Test
+    @WithUserDetails(value = USER_MAIL)
+    void update() throws Exception {
+        User updated = UserTestUtil.getUpdated();
+        perform(MockMvcRequestBuilders.put(URL)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(writeValue(updated)))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+        UserTestUtil.assertEquals(updated, userRepository.findById(USER_ID).orElseThrow());
     }
 }
